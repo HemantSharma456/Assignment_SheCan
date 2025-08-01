@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        iceberg: ['Iceberg', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+        libertinus: ['"Libertinus Sans"', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
