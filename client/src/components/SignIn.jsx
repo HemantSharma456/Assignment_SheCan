@@ -1,18 +1,28 @@
 import React from "react";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
 
+    const navigate = useNavigate(); 
+
     const handleGoogleSignIn = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log("Google Sign-In successful:", user);
-    } catch (error) {
-      console.error("Sign-In error:", error.message);
-    }
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        console.log("Google Sign-In successful:", user);
+        navigate("/dashboard")
+        } catch (error) {
+        console.error("Sign-In error:", error.message);
+        }
   };
+
+  const handleDummyLogin = (e) => {
+    e.preventDefault();
+    navigate("/dashboard");
+    };
+
 
   return (
     <div className="h-screen bg-cover bg-center flex items-start justify-start" style={{ backgroundImage: "url('/shecan.jpg')" }}>
@@ -37,7 +47,7 @@ function SignIn() {
                 />
             </div>
 
-            <button className="w-full bg-black text-white py-3 rounded-md font-semibold hover:opacity-90 transition">
+            <button className="w-full bg-black text-white py-3 rounded-md font-semibold hover:opacity-90 transition" onClick={handleDummyLogin}>
                 Login
             </button>
 
@@ -54,8 +64,6 @@ function SignIn() {
                 Keep pushing forward, your story is just beginning.”  
             </p>
 
-
-            
             </div>
         </div>
     </div>
