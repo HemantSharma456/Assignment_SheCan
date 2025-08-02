@@ -1,5 +1,58 @@
 import React, { useState, useEffect } from 'react'
 
+// Background configuration - easily customize your background here
+const BACKGROUND_CONFIG = {
+  // Set to 'image', 'gradient', or 'none'
+  type: 'image',
+  
+  // Background image options
+  image: {
+    // You can use any of these image URLs or add your own
+    url: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80', // Business/Team
+    // Alternative images you can use:
+    // url: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // Office space
+    // url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', // City skyline
+    // url: './background.jpg', // Use this for local images in public folder
+    opacity: 0.2,
+    overlay: 'from-blue-50/80 to-indigo-100/80'
+  },
+  
+  // Gradient fallback
+  gradient: 'from-blue-50 to-indigo-100'
+};
+
+// Reusable Background Wrapper Component
+const BackgroundWrapper = ({ children, config = BACKGROUND_CONFIG, errorMode = false }) => {
+  const baseClasses = "min-h-screen relative";
+  const gradientClasses = errorMode 
+    ? "bg-gradient-to-br from-red-50 to-pink-100" 
+    : `bg-gradient-to-br ${config.gradient}`;
+
+  return (
+    <div className={`${baseClasses} ${gradientClasses}`}>
+      {/* Background Image */}
+      {config.type === 'image' && (
+        <>
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('${config.image.url}')`,
+              opacity: errorMode ? config.image.opacity * 0.5 : config.image.opacity
+            }}
+          ></div>
+          {/* Gradient overlay for better readability */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${errorMode ? 'from-red-50/80 to-pink-100/80' : config.image.overlay}`}></div>
+        </>
+      )}
+      
+      {/* Content with proper z-index */}
+      <div className="relative z-10">
+        {children}
+      </div>
+    </div>
+  );
+};
+
 const App = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -61,36 +114,41 @@ const App = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600 text-center">Loading dashboard...</p>
-        </div>
-      </div>
+      <BackgroundWrapper config={BACKGROUND_CONFIG} errorMode={false}>
+        <div className="flex items-center justify-center min-h-screen">
+                      <div className="bg-white/95 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-white/20">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
+              <p className="mt-4 text-gray-600 text-center">Loading dashboard...</p>
+            </div>
+          </div>
+        </BackgroundWrapper>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-100 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+      <BackgroundWrapper config={BACKGROUND_CONFIG} errorMode={true}>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="bg-white/95 backdrop-blur-sm p-8 rounded-lg shadow-lg text-center border border-white/20">
           <div className="text-red-500 text-5xl mb-4">⚠️</div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Error Loading Dashboard</h2>
           <p className="text-gray-600">{error}</p>
-          <button 
-            onClick={() => window.location.reload()} 
-            className="mt-4 px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
-          >
-            Retry
-          </button>
-        </div>
-      </div>
+                        <button 
+                onClick={() => window.location.reload()} 
+                className="mt-4 px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+              >
+                Retry
+              </button>
+            </div>
+          </div>
+        </BackgroundWrapper>
     );
   }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4 py-8">
+      return (
+      <BackgroundWrapper config={BACKGROUND_CONFIG} errorMode={false}>
+        {/* Main Content */}
+        <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">Intern Dashboard</h1>
@@ -98,7 +156,7 @@ const App = () => {
         </header>
 
         {/* Profile Card */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 mb-8 border border-white/20">
           <div className="flex items-center space-x-4">
             <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
               {dashboardData?.name?.charAt(0) || 'U'}
@@ -125,7 +183,7 @@ const App = () => {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {/* Total Donations */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-white/20">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm font-medium">Total Donations Raised</p>
@@ -140,7 +198,7 @@ const App = () => {
           </div>
 
           {/* Donations Count */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-white/20">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm font-medium">Total Donations</p>
@@ -153,7 +211,7 @@ const App = () => {
           </div>
 
           {/* Join Date */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-white/20">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm font-medium">Member Since</p>
@@ -170,7 +228,7 @@ const App = () => {
 
         {/* Progress to Next Reward */}
         {getNextReward() && (
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 mb-8 border border-white/20">
             <h3 className="text-xl font-bold text-gray-800 mb-4">Progress to Next Reward</h3>
             <div className="flex items-center space-x-4">
               <span className="text-2xl">{getNextReward().icon}</span>
@@ -194,7 +252,7 @@ const App = () => {
         )}
 
         {/* Rewards Section */}
-        <div className="bg-white rounded-xl shadow-lg p-6">
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-white/20">
           <h3 className="text-2xl font-bold text-gray-800 mb-6">Rewards & Achievements</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {rewards.map((reward) => {
@@ -240,7 +298,7 @@ const App = () => {
           <p>Keep up the great work! Every donation makes a difference. 🌟</p>
         </footer>
       </div>
-    </div>
+    </BackgroundWrapper>
   );
 };
 

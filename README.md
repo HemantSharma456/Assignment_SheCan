@@ -141,11 +141,54 @@ Server health check endpoint.
 ## 🎨 Design Features
 
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **Gradient Backgrounds**: Modern blue-to-indigo gradients
+- **Customizable Background**: Beautiful background images with gradient overlays
+- **Glass Morphism**: Semi-transparent cards with backdrop blur effects
 - **Loading States**: Smooth loading animations
 - **Error Handling**: User-friendly error messages
 - **Interactive Elements**: Hover effects and transitions
 - **Card-based Layout**: Clean, organized information display
+
+## 🖼️ Background Customization
+
+The dashboard includes a flexible background system that you can easily customize:
+
+### Quick Background Change
+
+Edit the `BACKGROUND_CONFIG` object at the top of `client/src/App.jsx`:
+
+```javascript
+const BACKGROUND_CONFIG = {
+  // Set background type: 'image', 'gradient', or 'none'
+  type: 'image',
+  
+  image: {
+    // Choose from these options or add your own URL
+    url: 'https://images.unsplash.com/photo-1557804506-669a67965ba0', // Current: Business team
+    // url: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd', // Office space
+    // url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab', // City skyline
+    // url: './background.jpg', // Local image in public folder
+    
+    opacity: 0.2, // Adjust background opacity (0.1 - 0.5 recommended)
+    overlay: 'from-blue-50/80 to-indigo-100/80' // Gradient overlay for readability
+  },
+  
+  gradient: 'from-blue-50 to-indigo-100' // Fallback gradient
+};
+```
+
+### Background Options
+
+1. **Online Images**: Use any image URL (Unsplash, your CDN, etc.)
+2. **Local Images**: Place image in `client/public/` folder and reference as `./filename.jpg`
+3. **Gradient Only**: Set `type: 'gradient'` for solid gradient background
+4. **No Background**: Set `type: 'none'` for minimal styling
+
+### Styling Features
+
+- **Opacity Control**: Adjust image transparency
+- **Gradient Overlay**: Ensures text readability
+- **Glass Morphism**: Semi-transparent cards with backdrop blur
+- **Consistent Theming**: Background applies to all states (loading, error, main)
 
 ## 🧪 Testing with Postman
 
