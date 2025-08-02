@@ -28,7 +28,7 @@ function SignIn() {
     <div className="h-screen bg-cover bg-center flex items-start justify-start" style={{ backgroundImage: "url('/shecan.jpg')" }}>
         <div  className="bg-white h-[700px] p-8 w-[480px] ml-[250px] mt-[100px] flex flex-col">
             <img src="/logo.jpg" className="h-28 w-28 ml-[150px] mt-[30]"/>
-            <h1 className="font-libertinus text-4xl font-bold text-center mt-4">Welcome again!</h1>
+            <h1 className="font-libertinus text-4xl font-bold text-center mt-4">hey again!</h1>
             <p className="text-sm text-gray-500 text-center mt-2">Please Enter your details</p>
 
             <div className="mt-6 space-y-4">
