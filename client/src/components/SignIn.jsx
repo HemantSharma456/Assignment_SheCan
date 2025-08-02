@@ -4,74 +4,70 @@ import { auth, provider } from "../firebase";
 import { useNavigate } from "react-router-dom";
 
 function SignIn() {
-  const navigate = useNavigate();
 
-  const handleGoogleSignIn = async () => {
+    const navigate = useNavigate(); 
+
+    const handleGoogleSignIn = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log("Google Sign-In successful:", user);
-      navigate("/dashboard");
-    } catch (error) {
-      console.error("Sign-In error:", error.message);
-    }
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        console.log("Google Sign-In successful:", user);
+        navigate("/dashboard")
+        } catch (error) {
+        console.error("Sign-In error:", error.message);
+        }
   };
 
   const handleDummyLogin = (e) => {
     e.preventDefault();
     navigate("/dashboard");
-  };
+    };
+
 
   return (
-    <div
-      className="min-h-screen bg-cover bg-center flex items-center justify-center p-4"
-      style={{ backgroundImage: "url('/shecan.jpg')" }}
-    >
-      <div className="bg-white p-6 sm:p-8 rounded-lg w-full max-w-md shadow-md">
-        <div className="flex justify-center mb-4">
-          <img src="/logo.jpg" alt="logo" className="h-24 w-24 object-contain" />
+    <div className="h-screen bg-cover bg-center flex items-start justify-start" style={{ backgroundImage: "url('/shecan.jpg')" }}>
+        <div  className="bg-white h-[700px] p-8 w-[480px] ml-[250px] mt-[100px] flex flex-col">
+            <img src="/logo.jpg" className="h-28 w-28 ml-[150px] mt-[30]"/>
+            <h1 className="font-libertinus text-4xl font-bold text-center mt-4">Welcome again!</h1>
+            <p className="text-sm text-gray-500 text-center mt-2">Please Enter your details</p>
+
+            <div className="mt-6 space-y-4">
+            <div>
+                <input
+                type="email"
+                placeholder="Email"
+                className="w-full border-b-2 outline-none border-black placeholder-black text-xl font-semibold pb-3"
+                />
+            </div>
+            <div>
+                <input
+                type="password"
+                placeholder="Password"                                                                                                          
+                className="w-full border-b-2 outline-none border-black placeholder-black text-xl font-semibold pb-3 "
+                />
+            </div>
+
+            <button className="w-full bg-black text-white py-3 rounded-md font-semibold hover:opacity-90 transition" onClick={handleDummyLogin}>
+                Login
+            </button>
+
+            <button className="w-full bg-black text-white py-3 rounded-md font-semibold hover:opacity-90 transition"
+                onClick={handleGoogleSignIn}
+            >
+                Sign in with Google
+            </button>
+
+            <p className="text-center text-sm text-gray-500 mt-6 italic leading-relaxed">
+                “She believed she could, so she did. <br />
+                Strength doesn't come from what you can do, <br />
+                it comes from overcoming the things you once thought you couldn't. <br />
+                Keep pushing forward, your story is just beginning.”  
+            </p>
+
+            </div>
         </div>
-
-        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-2">Welcome again!</h1>
-        <p className="text-sm text-gray-500 text-center mb-6">
-          Please enter your details
-        </p>
-
-        <div className="space-y-4">
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full border-b-2 outline-none border-black placeholder-black text-lg pb-2"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full border-b-2 outline-none border-black placeholder-black text-lg pb-2"
-          />
-
-          <button
-            className="w-full bg-black text-white py-3 rounded-md font-semibold hover:opacity-90 transition"
-            onClick={handleDummyLogin}
-          >
-            Login
-          </button>
-
-          <button
-            className="w-full bg-black text-white py-3 rounded-md font-semibold hover:opacity-90 transition"
-            onClick={handleGoogleSignIn}
-          >
-            Sign in with Google
-          </button>
-        </div>
-
-        <p className="text-center text-sm text-gray-500 mt-6 italic leading-relaxed">
-          “She believed she could, so she did. <br />
-          Strength doesn't come from what you can do, <br />
-          it comes from overcoming the things you once thought you couldn't. <br />
-          Keep pushing forward, your story is just beginning.”
-        </p>
-      </div>
     </div>
+
   );
 }
 
