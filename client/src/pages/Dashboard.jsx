@@ -21,7 +21,8 @@ function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-blue-100">
+    <div className="min-h-screen bg-black ">
+
       {/* Navbar */}
       <nav className="bg-white shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-50">
         <div className="flex items-center space-x-3">
@@ -29,7 +30,7 @@ function Dashboard() {
             <img src="/logo.jpg" alt="logo" className="h-8 w-8 object-contain" />
             
             {/* TEXT AFTER LOGO */}
-            <h1 className="text-2xl font-bold text-blue-600">SheCan NGO</h1>
+            <h1 className="font-inter text-2xl font-bold text-blue-600 ">SheCan NGO</h1>
             <span className="text-sm text-gray-500 border-l pl-4">Intern Dashboard</span>
         </div>
 
@@ -57,10 +58,10 @@ function Dashboard() {
 
       {/* Main content */}
       <div className="max-w-6xl mx-auto p-6">
-        <h2 className="text-3xl font-semibold mb-4">Welcome, {user.name} 👋</h2>
-        <p className="text-gray-600 mb-6">
+        <h2 className="text-3xl font-bold mb-4 text-red-600 font-inter">Welcome, {user.name} 👋</h2>
+        <p className="text-white mb-6">
           Your Referral Code:{" "}
-          <span className="font-mono bg-gray-200 px-2 py-1 rounded">
+          <span className="font-mono bg-gray-200 px-2 py-1 rounded text-black">
             {user.referralCode}
           </span>
         </p>
@@ -97,19 +98,19 @@ function Dashboard() {
 
         {/* Rewards Section */}
         <div>
-          <h3 className="text-xl font-semibold mb-4">Rewards & Unlockables</h3>
+          <h3 className="text-xl font-semibold mb-4 text-white">Rewards & Unlockables</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <div className="bg-white p-4 rounded-lg shadow text-center h-[250px]">
               <img src="/badge1.png" alt="badge" className="h-[230px] mx-auto mb-2" />
-              <p className="font-semibold">Bronze Contributor</p>
+              <p className="font-semibold text-white">Bronze Contributor</p>
             </div>
             <div className="bg-white p-4 rounded-lg shadow text-center h-[250px]">
               <img src="/badge2.png" alt="badge" className="h-[230px] mx-auto mb-2" />
-              <p className="font-semibold">Referral Star</p>
+              <p className="font-semibold text-white">Referral Star</p>
             </div>
             <div className="bg-white p-4 rounded-lg shadow text-center h-[250px]">
               <img src="/badge3.png" alt="badge" className="h-[230px] mx-auto mb-2" />
-              <p className="font-semibold">Top 10% Intern</p>
+              <p className="font-semibold text-white">Top 50% </p>
             </div>
           </div>
         </div>
