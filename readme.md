@@ -1,4 +1,4 @@
-# 🌟 Fundraising Intern Portal – Internship Assignment
+# 🌟 Fundraising Intern Portal 
 
 Welcome to the **Fundraising Intern Portal** – a full-stack mock project built as part of the Full Stack Developer Internship (Round 1 Task). This is a real-life simulation of an NGO fundraising dashboard for interns.
 
