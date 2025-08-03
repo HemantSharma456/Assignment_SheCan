@@ -16,6 +16,11 @@ app.get("/intern-data", (req, res) => {
 });
 
 
+app.get("/home" , (req,res)=>{
+  console.log("Homepage");
+})
+
+
 app.listen(3000 , ()=>{
     console.log("The port is running at 3000");
 });
